@@ -1,0 +1,53 @@
+#!/bin/bash
+
+
+while true; do
+    clear
+    echo "==== Kalkulator Sederhana ===="
+    echo "1. Penjumlahan"
+    echo "2. Pengurangan"
+    echo "3. Perkalian"
+    echo "4. Pembagian"
+    echo "5. Keluar"
+    echo -n "Pilih operasi (1-5): "
+    read options
+
+    if [ "$options" -eq 5 ]; then
+        echo "Exit..."
+        break
+    fi
+
+    echo -n "Masukkan angka pertama: "
+    read a
+    echo -n "Masukkan angka kedua: "
+    read b
+
+    case $pilihan in
+        1)
+            hasil=$((a + b))
+            echo "Hasil: $a + $b = $hasil"
+            ;;
+        2)
+            hasil=$((a - b))
+            echo "Hasil: $a - $b = $hasil"
+            ;;
+        3)
+            hasil=$((a * b))
+            echo "Hasil: $a * $b = $hasil"
+            ;;
+        4)
+            if [ "$b" -eq 0 ]; then
+                echo "Error: Pembagian dengan nol tidak diperbolehkan."
+            else
+                hasil=$(echo "scale=2; $a / $b" | bc)
+                echo "Hasil: $a / $b = $hasil"
+            fi
+            ;;
+        *)
+            echo "Pilihan tidak valid!"
+            ;;
+    esac
+
+    echo
+    read -p "Tekan Enter untuk melanjutkan..."
+done
